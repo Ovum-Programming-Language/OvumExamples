@@ -22,7 +22,15 @@ function:3 _Global_Swap_IntArray_int_int {
     Return
 }
 
-function:3 _Global_Partition_IntArray_int_int {
+function:3 _Global_QuickSort_IntArray_int_int {
+    if {
+        LoadLocal 2
+        LoadLocal 1
+        IntGreaterEqual
+    } then {
+        Return
+    }
+
     PushInt 2
     LoadLocal 2
     LoadLocal 1
@@ -32,24 +40,17 @@ function:3 _Global_Partition_IntArray_int_int {
     Call _IntArray_GetAt_<C>_int
     SetLocal 3
     
-    PushInt 1
     LoadLocal 1
-    IntSubtract
     SetLocal 4
     
-    PushInt 1
     LoadLocal 2
-    IntAdd
     SetLocal 5
     
     while {
-        PushBool true
-    } then {
-        PushInt 1
+        LoadLocal 5
         LoadLocal 4
-        IntAdd
-        SetLocal 4
-        
+        IntLessEqual
+    } then {
         while {
             LoadLocal 3
             LoadLocal 4
@@ -62,12 +63,7 @@ function:3 _Global_Partition_IntArray_int_int {
             IntAdd
             SetLocal 4
         }
-            
-        PushInt 1
-        LoadLocal 5
-        IntSubtract
-        SetLocal 5
-        
+
         while {
             LoadLocal 3
             LoadLocal 5
@@ -86,41 +82,34 @@ function:3 _Global_Partition_IntArray_int_int {
             LoadLocal 4
             IntGreaterThan
         } then {
-            LoadLocal 5
-            Return
+            Break
         }
         
         LoadLocal 5
         LoadLocal 4
         LoadLocal 0
         Call _Global_Swap_IntArray_int_int
-    }
-}
-
-function:3 _Global_QuickSort_IntArray_int_int {
-    if {
-        LoadLocal 2
-        LoadLocal 1
-        IntLessThan
-    } then {
-        LoadLocal 2
-        LoadLocal 1
-        LoadLocal 0
-        Call _Global_Partition_IntArray_int_int
-        SetLocal 3
         
-        LoadLocal 3
-        LoadLocal 1
-        LoadLocal 0
-        Call _Global_QuickSort_IntArray_int_int
-        
-        LoadLocal 2
-        LoadLocal 3
         PushInt 1
+        LoadLocal 4
         IntAdd
-        LoadLocal 0
-        Call _Global_QuickSort_IntArray_int_int
+        SetLocal 4
+        
+        PushInt 1
+        LoadLocal 5
+        IntSubtract
+        SetLocal 5
     }
+    
+    LoadLocal 5
+    LoadLocal 1
+    LoadLocal 0
+    Call _Global_QuickSort_IntArray_int_int
+    
+    LoadLocal 2
+    LoadLocal 4
+    LoadLocal 0
+    Call _Global_QuickSort_IntArray_int_int
     
     Return
 }
@@ -175,13 +164,18 @@ function:1 _Global_Main_StringArray {
         LoadLocal 2
         Call _IntArray_GetAt_<C>_int
         IntToString
-        PrintLine
+        Print
+        PushString " "
+        Print
         
         LoadLocal 3
         PushInt 1
         IntAdd
         SetLocal 3
     }
+
+    PushString ""
+    PrintLine
     
     PushInt 0
     Return
