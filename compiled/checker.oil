@@ -2,7 +2,7 @@ init-static {
 }
 
 function:1 _Global_Main_StringArray {
-    PushString "./libovumffi.so"
+    PushString "./ovum_ffi.so"
     SetLocal 1
     
     if {
@@ -10,7 +10,7 @@ function:1 _Global_Main_StringArray {
         PushString "Windows"
         Call _String_Equals_<C>_Object
     } then {
-        PushString "ovumffi.dll"
+        PushString "ovum_ffi.dll"
         SetLocal 1
     }
 
