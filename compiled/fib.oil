@@ -1,0 +1,49 @@
+init-static {
+}
+
+pure(int) function:1 _Global_Fibonacci_int {
+    if {
+        PushInt 1
+        LoadLocal 0
+        IntLessEqual
+    } then {
+        LoadLocal 0
+        Return
+    }
+
+    PushInt 1
+    LoadLocal 0
+    IntSubtract
+    Call _Global_Fibonacci_int
+    PushInt 2
+    LoadLocal 0
+    IntSubtract
+    Call _Global_Fibonacci_int
+    IntAdd
+    Return
+}
+
+function:1 _Global_Main_StringArray {
+    if {
+        PushInt 0
+        LoadLocal 0
+        Call _StringArray_Length_<C>
+        IntGreaterThan
+    } then {
+        PushInt 0
+        LoadLocal 0
+        Call _StringArray_GetAt_<C>_int
+        StringToInt
+        SetLocal 1
+    } else {
+        PushInt 50
+        SetLocal 1
+    }
+    
+    LoadLocal 1
+    Call _Global_Fibonacci_int
+    IntToString
+    PrintLine
+    PushInt 0
+    Return
+}

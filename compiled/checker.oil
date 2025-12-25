@@ -1,0 +1,58 @@
+init-static {
+}
+
+function:1 _Global_Main_StringArray {
+    PushString "./libovumffi.so"
+    SetLocal 1
+    
+    if {
+        GetOsName
+        PushString "Windows"
+        Call _String_Equals_<C>_Object
+    } then {
+        PushString "ovumffi.dll"
+        SetLocal 1
+    }
+
+    PushString "IsCorrectId"
+    SetLocal 2
+
+    PushString "Enter the ID to check: "
+    Print
+    ReadLine
+    SetLocal 3
+    LoadLocal 3
+    PrintLine
+    PushInt 0
+    CallConstructor _Int_int
+    SetLocal 4
+
+    LoadLocal 4
+    CallConstructor _ByteArray_Object
+    LoadLocal 3
+    Call _String_ToUtf8Bytes_<C>
+    LoadLocal 2
+    LoadLocal 1
+    Interop
+    SetLocal 5
+    
+    if {
+        PushInt 0
+        LoadLocal 5
+        IntNotEqual
+    } then {
+        PushString "ID is incorrect"
+        PrintLine
+        PushInt 1
+        Return
+    }
+    
+    LoadLocal 4
+    Call _Int_ToString_<C>
+    PushString "ID is correct, your code: "
+    StringConcat
+    PrintLine
+    
+    PushInt 0
+    Return
+}

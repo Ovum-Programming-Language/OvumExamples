@@ -1,0 +1,156 @@
+init-static {
+}
+
+
+
+function:1 _Global_SieveOfEratosthenes_int {
+    PushBool false
+    PushInt 1
+    LoadLocal 0
+    IntAdd
+    CallConstructor _BoolArray_int_bool
+    SetLocal 1
+    
+    PushInt 0
+    SetLocal 2
+    
+    while {
+        LoadLocal 0
+        LoadLocal 2
+        IntLessEqual
+    } then {
+        
+        PushBool true
+        LoadLocal 2
+        LoadLocal 1
+        Call _BoolArray_SetAt_<M>_int_bool
+        
+        PushInt 1
+        LoadLocal 2
+        IntAdd
+        SetLocal 2
+    }
+    
+    PushBool false
+    PushInt 0
+    LoadLocal 1
+    Call _BoolArray_SetAt_<M>_int_bool
+    
+    PushBool false
+    PushInt 1
+    LoadLocal 1
+    Call _BoolArray_SetAt_<M>_int_bool
+    
+    
+    LoadLocal 0
+    IntToFloat
+    FloatSqrt
+    FloatToInt
+    SetLocal 3
+    
+    
+    PushInt 2
+    SetLocal 4
+    
+    while {
+        LoadLocal 3
+        LoadLocal 4
+        IntLessEqual
+    } then {
+        if {
+            LoadLocal 4
+            LoadLocal 1
+            Call _BoolArray_GetAt_<C>_int
+        } then {
+            LoadLocal 4
+            LoadLocal 4
+            IntMultiply
+            SetLocal 5
+            
+            while {
+                LoadLocal 0
+                LoadLocal 5
+                IntLessEqual
+            } then {
+                PushBool false
+                LoadLocal 5
+                LoadLocal 1
+                Call _BoolArray_SetAt_<M>_int_bool
+                
+                LoadLocal 4
+                LoadLocal 5
+                IntAdd
+                SetLocal 5
+            }
+        }
+        
+        PushInt 1
+        LoadLocal 4
+        IntAdd
+        SetLocal 4
+    }
+    
+    PushString "Prime numbers up to "
+    LoadLocal 0
+    CallConstructor _Int_int
+    Call _Int_ToString_<C>
+    Swap
+    StringConcat
+    PushString ":"
+    Swap
+    StringConcat
+    PrintLine
+    
+    PushInt 2
+    SetLocal 6
+    
+    while {
+        LoadLocal 0
+        LoadLocal 6
+        IntLessEqual
+    } then {
+        if {
+            LoadLocal 6
+            LoadLocal 1 
+            Call _BoolArray_GetAt_<C>_int
+        } then {
+            LoadLocal 6
+            CallConstructor _Int_int
+            Call _Int_ToString_<C>
+            PrintLine
+        }
+        
+        PushInt 1
+        LoadLocal 6
+        IntAdd
+        SetLocal 6
+    }
+    
+    Return
+}
+
+
+function:1 _Global_Main_StringArray {
+    PushString "Enter the maximum number to find primes: "
+    Print
+    
+    ReadInt
+    SetLocal 1
+    
+    if {
+        PushInt 2
+        LoadLocal 1
+        IntLessThan
+    } then {
+        PushString "Please enter a number greator or equal 2"
+        PrintLine
+        PushInt 1
+        Return
+    }
+    
+    LoadLocal 1
+    Call _Global_SieveOfEratosthenes_int
+    
+    PushInt 0
+    Return
+}
