@@ -1,0 +1,53 @@
+init-static {
+    PushInt 100000
+    SetStatic 0
+}
+
+function:0 _Global_PrintMemoryUsage {
+    PushString " bytes"
+    GetMemoryUsage
+    IntToString
+    StringConcat
+    PushString "Memory used: "
+    StringConcat
+    PrintLine
+    Return
+}
+
+function:1 _Global_Main_StringArray {
+    PushInt 0
+    SetLocal 1
+
+    while {
+        LoadStatic 0
+        LoadLocal 1
+        IntLessThan
+    } then {
+        PushInt 1
+        CallConstructor _Int_int
+        SetLocal 2
+
+        if {
+            PushInt 0
+            PushInt 5000
+            LoadLocal 1
+            IntModulo
+            IntEqual
+        } then {
+            LoadLocal 1
+            IntToString
+            PushString "Iteration: "
+            StringConcat
+            PrintLine
+            Call _Global_PrintMemoryUsage
+        }
+
+        PushInt 1
+        LoadLocal 1
+        IntAdd
+        SetLocal 1
+    }
+    
+    PushInt 0
+    Return
+}
