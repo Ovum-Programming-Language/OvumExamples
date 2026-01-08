@@ -24,7 +24,8 @@ function:1 _Global_Main_StringArray {
         IntLessThan
     } then {
         PushInt 1
-        CallConstructor _Int_int
+        PushInt 1000
+        CallConstructor _IntArray_int_int
         SetLocal 2
 
         if {
