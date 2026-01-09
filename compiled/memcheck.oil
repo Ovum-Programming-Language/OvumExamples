@@ -1,5 +1,5 @@
 init-static {
-    PushInt 100000
+    PushInt 20000
     SetStatic 0
 }
 
@@ -27,10 +27,16 @@ function:1 _Global_Main_StringArray {
         PushInt 1000
         CallConstructor _IntArray_int_int
         SetLocal 2
+        
+        PushInt 1
+        CallConstructor _Int_int
+        PushInt 1000
+        CallConstructor _ObjectArray_int_Object
+        SetLocal 3
 
         if {
             PushInt 0
-            PushInt 5000
+            PushInt 1666
             LoadLocal 1
             IntModulo
             IntEqual
@@ -48,6 +54,10 @@ function:1 _Global_Main_StringArray {
         IntAdd
         SetLocal 1
     }
+    
+    PushString "At the end"
+    PrintLine
+    Call _Global_PrintMemoryUsage
     
     PushInt 0
     Return
