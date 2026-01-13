@@ -7,7 +7,7 @@ function:1 _Global_Main_StringArray {
   if {
     PushString "Windows"
     GetOsName
-    CallVirtual _Equals_<C>_Object
+    Call _String_Equals_<C>_Object
   } then {
     PushString "ovum_ffi.dll"
     SetLocal 1

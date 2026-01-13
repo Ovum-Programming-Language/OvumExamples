@@ -52,7 +52,7 @@ function:1 _Global_SieveOfEratosthenes_int {
   PushString ":"
   LoadLocal 0
   CallConstructor _Int_int
-  CallVirtual _ToString_<C>
+  Call _Int_ToString_<C>
   PushString "Prime numbers up to "
   StringConcat
   StringConcat
@@ -71,7 +71,7 @@ function:1 _Global_SieveOfEratosthenes_int {
     } then {
       LoadLocal 2
       CallConstructor _Int_int
-      CallVirtual _ToString_<C>
+      Call _Int_ToString_<C>
       PrintLine
     }
     PushInt 1
