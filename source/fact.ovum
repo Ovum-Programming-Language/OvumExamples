@@ -10,7 +10,7 @@ fun Main(args: StringArray): int {
     var n : int = 50
     
     if (args.Length() != 0) {
-        sys::ToInt(args[0])
+        n = sys::ToInt(args[0])
     }
 
     sys::PrintLine(sys::ToString(Factorial(n)))
