@@ -14,11 +14,11 @@ class Rectangle implements IShape {
     }
     
     public override fun GetArea(): Float {
-        return this.Width * this.Height
+        return Float(this.Width * this.Height)
     }
     
     public override fun GetPerimeter(): Float {
-        return 2.0 * (this.Width + this.Height)
+        return Float(2.0 * (this.Width + this.Height))
     }
 }
 
@@ -31,11 +31,11 @@ class Circle implements IShape {
     }
     
     public override fun GetArea(): Float {
-        return PI * this.Radius * this.Radius
+        return Float(PI * this.Radius * this.Radius)
     }
     
     public override fun GetPerimeter(): Float {
-        return 2.0 * PI * this.Radius
+        return Float(2.0 * PI * this.Radius)
     }
 }
 
@@ -45,7 +45,7 @@ fun ProcessShape(shape: IShape): String {
     return "Area: " + area.ToString() + ", Perimeter: " + perimeter.ToString()
 }
 
-static val PI: Float = 3.14159
+global val PI: Float = 3.14159
 
 fun Main(args: StringArray): int {
     sys::PrintLine("Enter width and height: ")

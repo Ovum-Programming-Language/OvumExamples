@@ -2,7 +2,7 @@ fun PrintMemoryUsage() : Void {
     sys::PrintLine("Memory used: " + sys::GetMemoryUsage().ToString() + " bytes")
 }
 
-// static val MAX_ITER = 20000
+global val MAX_ITER : int = 20000
 
 fun Main(args: StringArray): int {
     var i : int = 0
