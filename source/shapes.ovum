@@ -45,7 +45,7 @@ fun ProcessShape(shape: IShape): String {
     return "Area: " + area.ToString() + ", Perimeter: " + perimeter.ToString()
 }
 
-//static val PI: Float = 3.14159
+static val PI: Float = 3.14159
 
 fun Main(args: StringArray): int {
     sys::PrintLine("Enter width and height: ")

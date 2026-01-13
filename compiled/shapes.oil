@@ -129,22 +129,32 @@ function:1 _Global_ProcessShape_IShape {
 }
 
 function:1 _Global_Main_StringArray {
-  PushFloat 3.0
-  PushFloat 5.0
-  CallConstructor _Rectangle_float_float
+  PushString "Enter width and height: "
+  PrintLine
+  ReadFloat
+  SetLocal 1
+  ReadFloat
   SetLocal 2
-  PushFloat 2.5
-  CallConstructor _Circle_float
+  PushString "Enter radius: "
+  PrintLine
+  ReadFloat
   SetLocal 3
   LoadLocal 2
-  Call _Global_ProcessShape_IShape
+  LoadLocal 1
+  CallConstructor _Rectangle_float_float
   SetLocal 4
   LoadLocal 3
-  Call _Global_ProcessShape_IShape
+  CallConstructor _Circle_float
   SetLocal 5
   LoadLocal 4
-  PrintLine
+  Call _Global_ProcessShape_IShape
+  SetLocal 6
   LoadLocal 5
+  Call _Global_ProcessShape_IShape
+  SetLocal 7
+  LoadLocal 6
+  PrintLine
+  LoadLocal 7
   PrintLine
   PushInt 0
   Return
