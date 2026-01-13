@@ -1,0 +1,17 @@
+init-static {
+}
+
+function:2 _Global_Add_float_float {
+  LoadLocal 0
+  Loadlocal 1
+  FloatAdd
+  Return
+}
+
+function:1 _Global_Main_StringArray {
+  PushFloat 0.0
+  PushFloat 1.0
+  Call _Global_Add_float_float
+  Return
+}
+
