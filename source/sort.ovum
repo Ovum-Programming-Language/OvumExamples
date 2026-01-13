@@ -6,7 +6,7 @@ fun Swap(var array: IntArray, a: int, b: int) : Void {
 
 fun QuickSort(var array: IntArray, start: int, end: int) : Void {
     if (start >= end) {
-        return 0
+        return
     }
 
     val pivot: int = array[(start + end) / 2]
