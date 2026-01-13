@@ -140,23 +140,21 @@ function:1 _Global_Main_StringArray {
       PushInt 1
       Return
     }
-    LoadLocal 4
-    SetLocal 5
     if {
-      LoadLocal 5
+      LoadLocal 4
       IsType Interval
     } then {
-      LoadLocal 5
+      LoadLocal 4
       CallConstructor _Nullable_Object
     } else {
       PushNull
     }
-    SetLocal 6
+    SetLocal 5
     LoadLocal 2
-    LoadLocal 6
+    LoadLocal 5
     NullCoalesce
-    SetLocal 7
-    LoadLocal 7
+    SetLocal 6
+    LoadLocal 6
     Call _Interval_ToString_<C>
     PrintLine
     PushInt 1
@@ -168,15 +166,15 @@ function:1 _Global_Main_StringArray {
   PrintLine
   PushInt 0
   CallConstructor _Int_int
-  SetLocal 8
+  SetLocal 7
   while {
     PushInt 4
-    LoadLocal 8
+    LoadLocal 7
     Unwrap
     IntLessThan
   } then {
     PushString ":"
-    LoadLocal 8
+    LoadLocal 7
     Call _Int_ToString_<C>
     PushString "Iteration "
     StringConcat
@@ -185,11 +183,11 @@ function:1 _Global_Main_StringArray {
     PushString "\n"
     PrintLine
     PushInt 0
-    SetLocal 9
+    SetLocal 8
     while {
       LoadLocal 1
       Call _ObjectArray_Length_<C>
-      LoadLocal 9
+      LoadLocal 8
       IntLessThan
     } then {
       PushFloat 100.0
@@ -201,7 +199,7 @@ function:1 _Global_Main_StringArray {
       RandomFloatRange
       CallConstructor _Float_float
       CallConstructor _Point_Float_Float
-      SetLocal 10
+      SetLocal 9
       PushFloat 100.0
       PushFloat 0.0
       RandomFloatRange
@@ -211,17 +209,17 @@ function:1 _Global_Main_StringArray {
       RandomFloatRange
       CallConstructor _Float_float
       CallConstructor _Point_Float_Float
-      SetLocal 11
-      LoadLocal 11
+      SetLocal 10
       LoadLocal 10
-      CallConstructor _Interval_Point_Point
       LoadLocal 9
+      CallConstructor _Interval_Point_Point
+      LoadLocal 8
       LoadLocal 1
       Call _ObjectArray_SetAt_<M>_int_Object
       PushInt 1
-      LoadLocal 9
+      LoadLocal 8
       IntAdd
-      SetLocal 9
+      SetLocal 8
     }
     PushFloat 1.0
     FloatNegate
@@ -261,23 +259,21 @@ function:1 _Global_Main_StringArray {
         PushInt 1
         Return
       }
-      LoadLocal 4
-      SetLocal 12
       if {
-        LoadLocal 12
+        LoadLocal 4
         IsType Interval
       } then {
-        LoadLocal 12
+        LoadLocal 4
         CallConstructor _Nullable_Object
       } else {
         PushNull
       }
-      SetLocal 6
+      SetLocal 5
       LoadLocal 2
-      LoadLocal 6
+      LoadLocal 5
       NullCoalesce
-      SetLocal 7
-      LoadLocal 7
+      SetLocal 6
+      LoadLocal 6
       Call _Interval_ToString_<C>
       PrintLine
       PushInt 1
@@ -286,13 +282,12 @@ function:1 _Global_Main_StringArray {
       SetLocal 3
     }
     PushInt 1
-    LoadLocal 8
+    LoadLocal 7
     Unwrap
     IntAdd
     CallConstructor _Int_int
-    SetLocal 8
+    SetLocal 7
   }
   PushInt 0
   Return
 }
-
