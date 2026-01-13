@@ -2,181 +2,157 @@ init-static {
 }
 
 function:3 _Global_Swap_IntArray_int_int {
-    LoadLocal 1
-    LoadLocal 0
-    Call _IntArray_GetAt_<C>_int
-    SetLocal 3
-    
-    LoadLocal 2
-    LoadLocal 0
-    Call _IntArray_GetAt_<C>_int
-    LoadLocal 1
-    LoadLocal 0
-    Call _IntArray_SetAt_<M>_int_int
-    
-    LoadLocal 3
-    LoadLocal 2
-    LoadLocal 0
-    Call _IntArray_SetAt_<M>_int_int
-    
-    Return
+  LoadLocal 1
+  LoadLocal 0
+  Call _IntArray_GetAt_<C>_int
+  SetLocal 3
+  LoadLocal 2
+  LoadLocal 0
+  Call _IntArray_GetAt_<C>_int
+  LoadLocal 1
+  LoadLocal 0
+  Call _IntArray_SetAt_<M>_int_int
+  LoadLocal 3
+  LoadLocal 2
+  LoadLocal 0
+  Call _IntArray_SetAt_<M>_int_int
 }
 
 function:3 _Global_QuickSort_IntArray_int_int {
-    if {
-        LoadLocal 2
-        LoadLocal 1
-        IntGreaterEqual
-    } then {
-        Return
-    }
-
-    PushInt 2
+  if {
     LoadLocal 2
     LoadLocal 1
-    IntAdd
-    IntDivide
-    LoadLocal 0
-    Call _IntArray_GetAt_<C>_int
-    SetLocal 3
-    
-    LoadLocal 1
-    SetLocal 4
-    
-    LoadLocal 2
-    SetLocal 5
-    
-    while {
-        LoadLocal 5
-        LoadLocal 4
-        IntLessEqual
-    } then {
-        while {
-            LoadLocal 3
-            LoadLocal 4
-            LoadLocal 0
-            Call _IntArray_GetAt_<C>_int
-            IntLessThan
-        } then {
-            PushInt 1
-            LoadLocal 4
-            IntAdd
-            SetLocal 4
-        }
-
-        while {
-            LoadLocal 3
-            LoadLocal 5
-            LoadLocal 0
-            Call _IntArray_GetAt_<C>_int
-            IntGreaterThan
-        } then {
-            PushInt 1
-            LoadLocal 5
-            IntSubtract
-            SetLocal 5
-        }
-        
-        if {
-            LoadLocal 5
-            LoadLocal 4
-            IntGreaterThan
-        } then {
-            Break
-        }
-        
-        LoadLocal 5
-        LoadLocal 4
-        LoadLocal 0
-        Call _Global_Swap_IntArray_int_int
-        
-        PushInt 1
-        LoadLocal 4
-        IntAdd
-        SetLocal 4
-        
-        PushInt 1
-        LoadLocal 5
-        IntSubtract
-        SetLocal 5
-    }
-    
+    IntGreaterEqual
+  } then {
+    Return
+  }
+  PushInt 2
+  LoadLocal 2
+  LoadLocal 1
+  IntAdd
+  IntDivide
+  LoadLocal 0
+  Call _IntArray_GetAt_<C>_int
+  SetLocal 3
+  LoadLocal 1
+  SetLocal 4
+  LoadLocal 2
+  SetLocal 5
+  while {
     LoadLocal 5
-    LoadLocal 1
-    LoadLocal 0
-    Call _Global_QuickSort_IntArray_int_int
-    
-    LoadLocal 2
+    LoadLocal 4
+    IntLessEqual
+  } then {
+    while {
+      LoadLocal 3
+      LoadLocal 4
+      LoadLocal 0
+      Call _IntArray_GetAt_<C>_int
+      IntLessThan
+    } then {
+      PushInt 1
+      LoadLocal 4
+      IntAdd
+      SetLocal 4
+    }
+    while {
+      LoadLocal 3
+      LoadLocal 5
+      LoadLocal 0
+      Call _IntArray_GetAt_<C>_int
+      IntGreaterThan
+    } then {
+      PushInt 1
+      LoadLocal 5
+      IntSubtract
+      SetLocal 5
+    }
+    if {
+      LoadLocal 5
+      LoadLocal 4
+      IntGreaterThan
+    } then {
+      Break
+    }
+    LoadLocal 5
     LoadLocal 4
     LoadLocal 0
-    Call _Global_QuickSort_IntArray_int_int
-    
-    Return
+    Call _Global_Swap_IntArray_int_int
+    PushInt 1
+    LoadLocal 4
+    IntAdd
+    SetLocal 4
+    PushInt 1
+    LoadLocal 5
+    IntSubtract
+    SetLocal 5
+  }
+  LoadLocal 5
+  LoadLocal 1
+  LoadLocal 0
+  Call _Global_QuickSort_IntArray_int_int
+  LoadLocal 2
+  LoadLocal 4
+  LoadLocal 0
+  Call _Global_QuickSort_IntArray_int_int
 }
 
 function:1 _Global_Main_StringArray {
-    ReadInt
-    SetLocal 1
-    
-    PushInt 0
-    LoadLocal 1
-    CallConstructor _IntArray_int_int
-    SetLocal 2
-    
-    PushInt 0
-    SetLocal 3
-    
-    while {
-        LoadLocal 1
-        LoadLocal 3
-        IntLessThan
-    } then {
-        ReadInt
-        SetLocal 4
-        
-        LoadLocal 4
-        LoadLocal 3
-        LoadLocal 2
-        Call _IntArray_SetAt_<M>_int_int
-        
-        LoadLocal 3
-        PushInt 1
-        IntAdd
-        SetLocal 3
-    }
-    
-    PushInt 1
-    LoadLocal 1
-    IntSubtract
-    PushInt 0
+  ReadInt
+  SetLocal 1
+  PushInt 0
+  LoadLocal 1
+  CallConstructor _IntArray_int_int
+  SetLocal 2
+  PushInt 0
+  SetLocal 3
+  while {
     LoadLocal 2
-    Call _Global_QuickSort_IntArray_int_int
-    
-    PushInt 0
+    Call _IntArray_Length_<C>
+    LoadLocal 3
+    IntLessThan
+  } then {
+    ReadInt
+    LoadLocal 3
+    LoadLocal 2
+    Call _IntArray_SetAt_<M>_int_int
+    PushInt 1
+    LoadLocal 3
+    IntAdd
     SetLocal 3
-    
-    while {
-        LoadLocal 1
-        LoadLocal 3
-        IntLessThan
-    } then {
-        LoadLocal 3
-        LoadLocal 2
-        Call _IntArray_GetAt_<C>_int
-        IntToString
-        Print
-        PushString " "
-        Print
-        
-        LoadLocal 3
-        PushInt 1
-        IntAdd
-        SetLocal 3
-    }
-
-    PushString ""
-    PrintLine
-    
-    PushInt 0
-    Return
+  }
+  PushInt 1
+  LoadLocal 2
+  Call _IntArray_Length_<C>
+  IntSubtract
+  PushInt 0
+  LoadLocal 2
+  Call _Global_QuickSort_IntArray_int_int
+  PushInt 0
+  SetLocal 4
+  while {
+    LoadLocal 2
+    Call _IntArray_Length_<C>
+    LoadLocal 4
+    IntLessThan
+  } then {
+    LoadLocal 4
+    LoadLocal 2
+    Call _IntArray_GetAt_<C>_int
+    SetLocal 5
+    LoadLocal 5
+    IntToString
+    Print
+    PushString " "
+    Print
+    PushInt 1
+    LoadLocal 4
+    IntAdd
+    SetLocal 4
+  }
+  PushString ""
+  PrintLine
+  PushInt 0
+  Return
 }
+

@@ -1,0 +1,19 @@
+pure fun Factorial(n: int) : int {
+    if (n <= 1) {
+        return 1
+    }
+
+    return Factorial(n - 1) * n
+}
+
+fun Main(args: StringArray): int {
+    var n : int = 50
+    
+    if (args.Length() != 0) {
+        sys::ToInt(args[0])
+    }
+
+    sys::PrintLine(sys::ToString(Factorial(n)))
+
+    return 0
+}

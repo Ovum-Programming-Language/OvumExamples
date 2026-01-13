@@ -1,0 +1,64 @@
+interface IShape {
+    fun GetArea(): Float
+    fun GetPerimeter(): Float
+}
+
+class Rectangle implements IShape {
+    public var Width: Float
+    public var Height: Float
+    
+    public fun Rectangle(width: float, height: float): Rectangle {
+        this.Width = width
+        this.Height = height
+        return this
+    }
+    
+    public override fun GetArea(): Float {
+        return this.Width * this.Height
+    }
+    
+    public override fun GetPerimeter(): Float {
+        return 2.0 * (this.Width + this.Height)
+    }
+}
+
+class Circle implements IShape {
+    public var Radius: Float
+    
+    public fun Circle(radius: float): Circle {
+        this.Radius = radius
+        return this
+    }
+    
+    public override fun GetArea(): Float {
+        return PI * this.Radius * this.Radius
+    }
+    
+    public override fun GetPerimeter(): Float {
+        return 2.0 * PI * this.Radius
+    }
+}
+
+fun ProcessShape(shape: IShape): String {
+    val area: Float = shape.GetArea()
+    val perimeter: Float = shape.GetPerimeter()
+    return "Area: " + area.ToString() + ", Perimeter: " + perimeter.ToString()
+}
+
+//static val PI: Float = 3.14159
+
+fun Main(args: StringArray): int {
+    sys::PrintLine("Enter width and height: ")
+    val width : float = sys::ReadFloat()
+    val height : float = sys::ReadFloat()
+    sys::PrintLine("Enter radius: ")
+    val radius : float = sys::ReadFloat()
+    val rectangle: Rectangle = Rectangle(width, height)
+    val circle: Circle = Circle(radius)
+    val resultRectangle: String = ProcessShape(rectangle)
+    val resultCircle: String = ProcessShape(circle)
+    sys::PrintLine(resultRectangle)
+    sys::PrintLine(resultCircle)
+    
+    return 0
+}

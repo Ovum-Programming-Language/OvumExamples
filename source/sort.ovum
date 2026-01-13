@@ -1,0 +1,58 @@
+fun Swap(var array: IntArray, a: int, b: int) : Void {
+    val temp: int = array[a]
+    array[a] = array[b]
+    array[b] = temp
+}
+
+fun QuickSort(var array: IntArray, start: int, end: int) : Void {
+    if (start >= end) {
+        return 0
+    }
+
+    val pivot: int = array[(start + end) / 2]
+    var i: int = start
+    var j: int = end
+
+    while (i <= j) {
+        while (array[i] < pivot) {
+            i = i + 1
+        }
+
+        while (array[j] > pivot) {
+            j = j - 1
+        }
+
+        if (i > j) {
+            break
+        }
+
+        Swap(array, i, j)
+        i = i + 1
+        j = j - 1
+    }
+
+    QuickSort(array, start, j)
+    QuickSort(array, i, end)
+}
+
+fun Main(args: StringArray): int {
+    val n: int = sys::ReadInt()
+    var array: IntArray = IntArray(n, 0)
+    
+    var i: int = 0
+    while (i < array.Length()) {
+        array[i] = sys::ReadInt()
+        i = i + 1
+    }
+
+    QuickSort(array, 0, array.Length() - 1)
+
+    for (element in array) {
+        sys::Print(sys::ToString(element))
+        sys::Print(" ")
+    }
+
+    sys::PrintLine("")
+
+    return 0
+}

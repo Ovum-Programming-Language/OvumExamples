@@ -1,0 +1,27 @@
+fun Main(args: StringArray): int {
+    var libName : String = "./ovum_ffi.so"
+
+    if (sys::GetOsName().Equals("Windows")) {
+        libName = "ovum_ffi.dll"
+    }
+
+    val functionName : String = "IsCorrectId"
+    sys::Print("Enter the ID to check: ")
+    var id : String = sys::ReadLine()
+    sys::PrintLine(id)
+    var answer : Int = Int(0)
+    var result : int = -1
+    
+    unsafe {
+        result = sys::Interop(libName, functionName, id.ToUtf8Bytes(), ByteArray(answer))
+    }
+
+    if (result != 0) {
+        sys::PrintLine("ID is incorrect")
+        return 1
+    }
+
+    sys::PrintLine("ID is correct, your code: " + answer.ToString())
+
+    return 0
+}

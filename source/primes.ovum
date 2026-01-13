@@ -1,0 +1,43 @@
+fun SieveOfEratosthenes(n : int) : Void {
+    var prime_array : BoolArray = BoolArray(n + 1, true)
+    var p: int = 2
+    var n_sqrt = sys::Sqrt(n as float) as int
+    
+    while (p <= n_sqrt) {
+        if (prime_array[p]) {
+            var i: int = p * p
+
+            while (i <= n) {
+                prime_array[i] = false
+                i = i + p
+            }
+        }
+
+        p = p + 1
+    }
+
+    sys::PrintLine("Prime numbers up to " + Int(n).ToString() + ":")
+    p = 2
+
+    while (p <= n) {
+        if (prime_array[p]) {
+            sys::PrintLine(Int(p).ToString())
+        }
+
+        p = p + 1
+    }
+}
+
+fun Main(args: StringArray): int {
+    sys::Print("Enter the maximum number to find primes: ")
+    val n : int = sys::ReadInt()
+
+    if (n < 2) {
+        sys::PrintLine("Please enter a number greater or equal 2")
+        return 1
+    }
+
+    SieveOfEratosthenes(n)
+
+    return 0
+}

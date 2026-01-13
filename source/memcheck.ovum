@@ -1,0 +1,26 @@
+fun PrintMemoryUsage() : Void {
+    sys::PrintLine("Memory used: " + sys::GetMemoryUsage().ToString() + " bytes")
+}
+
+// static val MAX_ITER = 20000
+
+fun Main(args: StringArray): int {
+    var i : int = 0
+    
+    while (i < MAX_ITER) {
+        val int_array : IntArray = IntArray(1000, 1)
+        val obj_array : ObjectArray = ObjectArray(1000, Int(1))
+
+        if (i % 1666 == 0) {
+            sys::PrintLine("Iteration: " + sys::ToString(i))
+            PrintMemoryUsage()
+        }
+
+        i = i + 1
+    }
+
+    sys::PrintLine("At the end")
+    PrintMemoryUsage()
+    
+    return 0
+}
