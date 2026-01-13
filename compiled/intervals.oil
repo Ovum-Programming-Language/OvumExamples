@@ -291,3 +291,4 @@ function:1 _Global_Main_StringArray {
   PushInt 0
   Return
 }
+
