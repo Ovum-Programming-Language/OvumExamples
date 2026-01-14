@@ -1,0 +1,52 @@
+fun Main(args: StringArray): int {
+    val path : String = "TEMP_OVUM_FILE.txt"
+    val copyPath : String = "COPY_TEMP_OVUM_FILE.txt"
+    val content : String = "quidquid id est, timeo Danaos et dona ferentes."
+    val contentBytes : ByteArray = content.ToUtf8Bytes()
+    contentBytes.RemoveAt(-1) // circular indexing
+    
+    var file : File = File()
+    file.Open(path, "w")
+    file.WriteLine(content)
+    file.Close()
+
+    var readFile : File = File()
+    readFile.Open(path, "r")
+    val extractedContent : String = readFile.ReadLine()
+    readFile.Close()
+    sys::PrintLine(extractedContent)
+
+    sys::CopyFile(path, copyPath)
+
+    var copyFile : File = File()
+    copyFile.Open(path, "r")
+    var extractedBytes : ByteArray = copyFile.Read(content.Length())
+    copyFile.Close()
+    
+    if (!extractedBytes.Equals(contentBytes)) {
+        sys::PrintLine("Content mismatch")
+
+        if (extractedBytes.Length() != contentBytes.Length()) {
+            sys::PrintLine("Length differs: " + sys::ToString(extractedBytes.Length() - contentBytes.Length()))
+        }
+
+        var i : Int = 0
+        while (i < contentBytes.Length()) {
+            if (extractedBytes[i] != contentBytes[i]) {
+                val diff : int = (extractedBytes[i] - contentBytes[i]) as int
+                sys::PrintLine("Diff at " + i.ToString() + ", value " + sys::ToString(diff))
+            }
+            i := i + 1
+        }
+    }
+
+    if (!sys::DeleteFile(path)) {
+        sys::PrintLine("File " + path + " was not deleted")
+    }
+
+    if (!sys::DeleteFile(copyPath)) {
+        sys::PrintLine("File " + copyPath + " was not deleted")
+    }
+
+    return 0
+}

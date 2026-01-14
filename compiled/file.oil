@@ -1,0 +1,161 @@
+init-static {
+}
+
+function:1 _Global_Main_StringArray {
+  PushString "TEMP_OVUM_FILE.txt"
+  SetLocal 1
+  PushString "COPY_TEMP_OVUM_FILE.txt"
+  SetLocal 2
+  PushString "quidquid id est, timeo Danaos et dona ferentes."
+  SetLocal 3
+  LoadLocal 3
+  Call _String_ToUtf8Bytes_<C>
+  SetLocal 4
+  PushInt 1
+  IntNegate
+  LoadLocal 4
+  Call _ByteArray_RemoveAt_<M>_int
+  CallConstructor _File
+  SetLocal 5
+  PushString "w"
+  LoadLocal 1
+  LoadLocal 5
+  Call _File_Open_<M>_String_String
+  LoadLocal 3
+  LoadLocal 5
+  Call _File_WriteLine_<M>_String
+  LoadLocal 5
+  Call _File_Close_<M>
+  CallConstructor _File
+  SetLocal 6
+  PushString "r"
+  LoadLocal 1
+  LoadLocal 6
+  Call _File_Open_<M>_String_String
+  LoadLocal 6
+  Call _File_ReadLine_<M>
+  SetLocal 7
+  LoadLocal 6
+  Call _File_Close_<M>
+  LoadLocal 7
+  PrintLine
+  LoadLocal 2
+  LoadLocal 1
+  CopyFile
+  CallConstructor _File
+  SetLocal 8
+  PushString "r"
+  LoadLocal 1
+  LoadLocal 8
+  Call _File_Open_<M>_String_String
+  LoadLocal 3
+  Call _String_Length_<C>
+  LoadLocal 8
+  Call _File_Read_<M>_Int
+  SetLocal 9
+  LoadLocal 8
+  Call _File_Close_<M>
+  if {
+    LoadLocal 4
+    LoadLocal 9
+    Call _ByteArray_Equals_<C>_Object
+    BoolNot
+  } then {
+    PushString "Content mismatch"
+    PrintLine
+    if {
+      LoadLocal 4
+      Call _ByteArray_Length_<C>
+      LoadLocal 9
+      Call _ByteArray_Length_<C>
+      IntNotEqual
+    } then {
+      LoadLocal 4
+      Call _ByteArray_Length_<C>
+      LoadLocal 9
+      Call _ByteArray_Length_<C>
+      IntSubtract
+      IntToString
+      PushString "Length differs: "
+      StringConcat
+      PrintLine
+    }
+    PushInt 0
+    CallConstructor _Int_int
+    SetLocal 10
+    while {
+      LoadLocal 4
+      Call _ByteArray_Length_<C>
+      LoadLocal 10
+      Unwrap
+      IntLessThan
+    } then {
+      if {
+        LoadLocal 10
+        Unwrap
+        LoadLocal 4
+        Call _ByteArray_GetAt_<C>_int
+        LoadLocal 10
+        Unwrap
+        LoadLocal 9
+        Call _ByteArray_GetAt_<C>_int
+        ByteNotEqual
+      } then {
+        LoadLocal 10
+        Unwrap
+        LoadLocal 4
+        Call _ByteArray_GetAt_<C>_int
+        LoadLocal 10
+        Unwrap
+        LoadLocal 9
+        Call _ByteArray_GetAt_<C>_int
+        ByteSubtract
+        ByteToInt
+        SetLocal 11
+        LoadLocal 11
+        IntToString
+        PushString ", value "
+        LoadLocal 10
+        Call _Int_ToString_<C>
+        PushString "Diff at "
+        StringConcat
+        StringConcat
+        StringConcat
+        PrintLine
+      }
+      PushInt 1
+      LoadLocal 10
+      Unwrap
+      IntAdd
+      LoadLocal 10
+      Call _Int_copy_<M>_int
+    }
+  }
+  if {
+    LoadLocal 1
+    DeleteFile
+    BoolNot
+  } then {
+    PushString " was not deleted"
+    LoadLocal 1
+    PushString "File "
+    StringConcat
+    StringConcat
+    PrintLine
+  }
+  if {
+    LoadLocal 2
+    DeleteFile
+    BoolNot
+  } then {
+    PushString " was not deleted"
+    LoadLocal 2
+    PushString "File "
+    StringConcat
+    StringConcat
+    PrintLine
+  }
+  PushInt 0
+  Return
+}
+
