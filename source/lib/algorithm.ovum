@@ -36,7 +36,7 @@ fun QuickSort(var array: IntArray, start: int, end: int) : Void {
 }
 
 fun Sort(var array: IntArray) : Void {
-    return QuickSort(array, 0, array.Length() - 1)
+    QuickSort(array, 0, array.Length() - 1)
 }
 
 fun Swap(var array: FloatArray, a: int, b: int) : Void {
@@ -77,7 +77,7 @@ fun QuickSort(var array: FloatArray, start: int, end: int) : Void {
 }
 
 fun Sort(var array: FloatArray) : Void {
-    return QuickSort(array, 0, array.Length() - 1)
+    QuickSort(array, 0, array.Length() - 1)
 }
 
 fun Swap(var array: StringArray, a: int, b: int) : Void {
@@ -118,5 +118,5 @@ fun QuickSort(var array: StringArray, start: int, end: int) : Void {
 }
 
 fun Sort(var array: StringArray) : Void {
-    return QuickSort(array, 0, array.Length() - 1)
+    QuickSort(array, 0, array.Length() - 1)
 }

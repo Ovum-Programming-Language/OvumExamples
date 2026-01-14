@@ -166,7 +166,6 @@ function:1 _Global_Sort_IntArray {
   PushInt 0
   LoadLocal 0
   Call _Global_QuickSort_IntArray_int_int
-  Return
 }
 
 function:3 _Global_Swap_FloatArray_int_int {
@@ -273,7 +272,6 @@ function:1 _Global_Sort_FloatArray {
   PushInt 0
   LoadLocal 0
   Call _Global_QuickSort_FloatArray_int_int
-  Return
 }
 
 function:3 _Global_Swap_StringArray_int_int {
@@ -380,7 +378,6 @@ function:1 _Global_Sort_StringArray {
   PushInt 0
   LoadLocal 0
   Call _Global_QuickSort_StringArray_int_int
-  Return
 }
 
 vtable RandomSorter {

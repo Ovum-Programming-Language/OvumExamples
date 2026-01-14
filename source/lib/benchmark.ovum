@@ -3,7 +3,7 @@ interface ITask {
     fun Run(args : StringArray) : int
 }
 
-fun RunBenchmark(task : ITask, args : StringArray) {
+fun RunBenchmark(task : ITask, args : StringArray) : int {
     val start : Int = sys::UnixTimeNs()
     val result : int = task.Run(args)
     val end : Int = sys::UnixTimeNs()
