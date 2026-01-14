@@ -1,0 +1,219 @@
+global val PI : float = 3.141592653589793
+global val SOLAR_MASS : float = 4.0 * PI * PI
+global val DAYS_PER_YEAR : float = 365.24
+
+class Body {
+    public var x: float
+    public var y: float
+    public var z: float
+
+    public var vx: float
+    public var vy: float
+    public var vz: float
+
+    public var mass: float
+
+    public fun Body(
+        x: float, y: float, z: float,
+        vx: float, vy: float, vz: float,
+        mass: float
+    ): Body {
+        this.x = x
+        this.y = y
+        this.z = z
+        this.vx = vx
+        this.vy = vy
+        this.vz = vz
+        this.mass = mass
+        return this
+    }
+
+    public fun OffsetMomentum(px: float, py: float, pz: float) : void {
+        this.vx = -px / SOLAR_MASS
+        this.vy = -py / SOLAR_MASS
+        this.vz = -pz / SOLAR_MASS
+    }
+}
+
+fun Sun(): Body {
+    return Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS)
+}
+
+fun Jupiter(): Body {
+    return Body(4.84143144246472090e+00, -1.16032004402742839e+00, -1.03622044471123109e-01, 1.66007664274403694e-03 * DAYS_PER_YEAR, 7.69901118419740425e-03 * DAYS_PER_YEAR, -6.90460016972063023e-05 * DAYS_PER_YEAR, 9.54791938424326609e-04 * SOLAR_MASS)
+}
+
+fun Saturn(): Body {
+    return Body(8.34336671824457987e+00, 4.12479856412430479e+00, -4.03523417114321381e-01, -2.76742510726862411e-03 * DAYS_PER_YEAR, 4.99852801234917238e-03 * DAYS_PER_YEAR, 2.30417297573763929e-05 * DAYS_PER_YEAR, 2.85885980666130812e-04 * SOLAR_MASS);
+}
+
+fun Uranus(): Body {
+    return Body(1.28943695621391310e+01, -1.51111514016986312e+01, -2.23307578892655734e-01, 2.96460137564761618e-03 * DAYS_PER_YEAR, 2.37847173959480950e-03 * DAYS_PER_YEAR, -2.96589568540237556e-05 * DAYS_PER_YEAR, 4.36624404335156298e-05 * SOLAR_MASS);
+}
+
+fun Neptune(): Body {
+    return Body(1.53796971148509165e+01, -2.59193146099879641e+01, 1.79258772950371181e-01, 2.68067772490389322e-03 * DAYS_PER_YEAR, 1.62824170038242295e-03 * DAYS_PER_YEAR, -9.51592254519715870e-05 * DAYS_PER_YEAR, 5.15138902046611451e-05 * SOLAR_MASS);
+}
+
+class BodyArray {
+    private var data: ObjectArray
+    private val default : Body
+
+    public fun BodyArray(size: int): BodyArray {
+        this.data = ObjectArray(size, null)
+        this.default = Sun()
+        return this
+    }
+
+    public fun Set(index: int, body: Body): Void {
+        this.data[index] = body
+    }
+
+    public fun Get(index: int): Body {
+        return this.data[index] as Body ?: this.default
+    }
+
+    public fun Length(): int {
+        return this.data.Length()
+    }
+}
+
+class NBodySystem {
+    private var bodies: BodyArray
+
+    public fun NBodySystem(bodies: BodyArray): NBodySystem {
+        this.bodies = bodies
+
+        var px: float = 0.0
+        var py: float = 0.0
+        var pz: float = 0.0
+
+        var i: int = 0
+        while (i < this.bodies.Length()) {
+            val b: Body = this.bodies.Get(i)
+            val m: float = b.mass
+            px = px + b.vx * m
+            py = py + b.vy * m
+            pz = pz + b.vz * m
+            i = i + 1
+        }
+
+        this.bodies.Get(0).OffsetMomentum(px, py, pz)
+        return this
+    }
+
+    public fun Advance(dt: float): Void {
+        val size: int = this.bodies.Length()
+
+        var i: int = 0
+        while (i < size) {
+            val bi: Body = this.bodies.Get(i)
+            var j: int = i + 1
+
+            while (j < size) {
+                val bj: Body = this.bodies.Get(j)
+
+                val dx: float = bi.x - bj.x
+                val dy: float = bi.y - bj.y
+                val dz: float = bi.z - bj.z
+
+                val dist: float = sys::Sqrt(dx*dx + dy*dy + dz*dz)
+                val mag: float = dt / (dist * dist * dist)
+
+                bi.vx = bi.vx - dx * bj.mass * mag
+                bi.vy = bi.vy - dy * bj.mass * mag
+                bi.vz = bi.vz - dz * bj.mass * mag
+
+                bj.vx = bj.vx + dx * bi.mass * mag
+                bj.vy = bj.vy + dy * bi.mass * mag
+                bj.vz = bj.vz + dz * bi.mass * mag
+
+                j = j + 1
+            }
+
+            i = i + 1
+        }
+
+        i = 0
+        while (i < size) {
+            val b: Body = this.bodies.Get(i)
+            b.x = b.x + dt * b.vx
+            b.y = b.y + dt * b.vy
+            b.z = b.z + dt * b.vz
+            i = i + 1
+        }
+    }
+
+    public fun Energy(): float {
+        var e: float = 0.0
+        val size: int = this.bodies.Length()
+
+        var i: int = 0
+        while (i < size) {
+            val bi: Body = this.bodies.Get(i)
+
+            e = e + 0.5 * bi.mass * (bi.vx*bi.vx + bi.vy*bi.vy + bi.vz*bi.vz)
+
+            var j: int = i + 1
+            while (j < size) {
+                val bj: Body = this.bodies.Get(j)
+                val dx: float = bi.x - bj.x
+                val dy: float = bi.y - bj.y
+                val dz: float = bi.z - bj.z
+                val dist: float = sys::Sqrt(dx*dx + dy*dy + dz*dz)
+                e = e - (bi.mass * bj.mass) / dist
+                j = j + 1
+            }
+
+            i = i + 1
+        }
+
+        return e
+    }
+}
+
+fun FloatEqualsWithPrecision(a: float, b: float, precision: float): bool {
+    val diff : float = a - b
+    
+    if (diff < precision || -diff > -precision) {
+        return true
+    }
+
+    return false
+}
+
+fun Main(args: StringArray): int {
+    var ret: float = 0.0
+
+    var n: int = 3
+    while (n <= 24) {
+        val bodies: BodyArray = BodyArray(5)
+        bodies.Set(0, Sun())
+        bodies.Set(1, Jupiter())
+        bodies.Set(2, Saturn())
+        bodies.Set(3, Uranus())
+        bodies.Set(4, Neptune())
+
+        val system: NBodySystem = NBodySystem(bodies)
+
+        ret = ret + system.Energy()
+
+        var i: int = 0
+        val max: int = n * 100
+        while (i < max) {
+            system.Advance(0.01)
+            i = i + 1
+        }
+
+        ret = ret + system.Energy()
+        n = n * 2
+    }
+
+    val expected: float = -1.35248624085361
+    if (!FloatEqualsWithPrecision(ret, expected, 1e-15)) {
+        sys::PrintLine("ERROR: bad result: " + sys::ToString(ret) + ", expected " + sys::ToString(expected))
+        return 1
+    }
+
+    return 0
+}

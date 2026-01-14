@@ -1,0 +1,743 @@
+init-static {
+  PushFloat 3.141592653589793
+  SetStatic 0
+  LoadStatic 0
+  LoadStatic 0
+  PushFloat 4.0
+  FloatMultiply
+  FloatMultiply
+  SetStatic 1
+  PushFloat 365.240000000000009
+  SetStatic 2
+}
+
+vtable Body {
+  size: 64
+  methods {
+    _OffsetMomentum_<C>_float_float_float: _Body_OffsetMomentum_<C>_float_float_float
+  }
+  vartable {
+    x: float@8
+    y: float@16
+    z: float@24
+    vx: float@32
+    vy: float@40
+    vz: float@48
+    mass: float@56
+  }
+}
+
+function:8 _Body_float_float_float_float_float_float_float {
+  LoadLocal 1
+  LoadLocal 0
+  SetField 0
+  LoadLocal 2
+  LoadLocal 0
+  SetField 1
+  LoadLocal 3
+  LoadLocal 0
+  SetField 2
+  LoadLocal 4
+  LoadLocal 0
+  SetField 3
+  LoadLocal 5
+  LoadLocal 0
+  SetField 4
+  LoadLocal 6
+  LoadLocal 0
+  SetField 5
+  LoadLocal 7
+  LoadLocal 0
+  SetField 6
+  LoadLocal 0
+  Return
+}
+
+function:4 _Body_OffsetMomentum_<C>_float_float_float {
+  LoadStatic 1
+  LoadLocal 1
+  FloatNegate
+  FloatDivide
+  LoadLocal 0
+  SetField 3
+  LoadStatic 1
+  LoadLocal 2
+  FloatNegate
+  FloatDivide
+  LoadLocal 0
+  SetField 4
+  LoadStatic 1
+  LoadLocal 3
+  FloatNegate
+  FloatDivide
+  LoadLocal 0
+  SetField 5
+}
+
+function:0 _Global_Sun {
+  LoadStatic 1
+  PushFloat 0.0
+  PushFloat 0.0
+  PushFloat 0.0
+  PushFloat 0.0
+  PushFloat 0.0
+  PushFloat 0.0
+  CallConstructor _Body_float_float_float_float_float_float_float
+  Return
+}
+
+function:0 _Global_Jupiter {
+  LoadStatic 1
+  PushFloat 0.000954791938424
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.000069046001697
+  FloatNegate
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.007699011184197
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.001660076642744
+  FloatMultiply
+  PushFloat 0.103622044471123
+  FloatNegate
+  PushFloat 1.160320044027428
+  FloatNegate
+  PushFloat 4.841431442464721
+  CallConstructor _Body_float_float_float_float_float_float_float
+  Return
+}
+
+function:0 _Global_Saturn {
+  LoadStatic 1
+  PushFloat 0.000285885980666
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.000023041729757
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.004998528012349
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.002767425107269
+  FloatNegate
+  FloatMultiply
+  PushFloat 0.403523417114321
+  FloatNegate
+  PushFloat 4.124798564124305
+  PushFloat 8.343366718244580
+  CallConstructor _Body_float_float_float_float_float_float_float
+  Return
+}
+
+function:0 _Global_Uranus {
+  LoadStatic 1
+  PushFloat 0.000043662440434
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.000029658956854
+  FloatNegate
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.002378471739595
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.002964601375648
+  FloatMultiply
+  PushFloat 0.223307578892656
+  FloatNegate
+  PushFloat 15.111151401698631
+  FloatNegate
+  PushFloat 12.894369562139131
+  CallConstructor _Body_float_float_float_float_float_float_float
+  Return
+}
+
+function:0 _Global_Neptune {
+  LoadStatic 1
+  PushFloat 0.000051513890205
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.000095159225452
+  FloatNegate
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.001628241700382
+  FloatMultiply
+  LoadStatic 2
+  PushFloat 0.002680677724904
+  FloatMultiply
+  PushFloat 0.179258772950371
+  PushFloat 25.919314609987964
+  FloatNegate
+  PushFloat 15.379697114850917
+  CallConstructor _Body_float_float_float_float_float_float_float
+  Return
+}
+
+vtable BodyArray {
+  size: 24
+  methods {
+    _Set_<C>_int_Body: _BodyArray_Set_<C>_int_Body
+    _Get_<C>_int: _BodyArray_Get_<C>_int
+    _Length_<C>: _BodyArray_Length_<C>
+  }
+  vartable {
+    data: Object@8
+    default: Object@16
+  }
+}
+
+function:2 _BodyArray_int {
+  PushNull
+  LoadLocal 1
+  CallConstructor _ObjectArray_int_Object
+  LoadLocal 0
+  SetField 0
+  Call _Global_Sun
+  LoadLocal 0
+  SetField 1
+  LoadLocal 0
+  Return
+}
+
+function:3 _BodyArray_Set_<C>_int_Body {
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 0
+  GetField 0
+  Call _ObjectArray_SetAt_<M>_int_Object
+}
+
+function:2 _BodyArray_Get_<C>_int {
+  LoadLocal 1
+  LoadLocal 0
+  GetField 0
+  Call _ObjectArray_GetAt_<C>_int
+  SetLocal 2
+  if {
+    LoadLocal 2
+    IsType Body
+  } then {
+    LoadLocal 2
+    CallConstructor _Nullable_Object
+  } else {
+    PushNull
+  }
+  SetLocal 3
+  LoadLocal 0
+  GetField 1
+  LoadLocal 3
+  NullCoalesce
+  Return
+}
+
+function:1 _BodyArray_Length_<C> {
+  LoadLocal 0
+  GetField 0
+  Call _ObjectArray_Length_<C>
+  Return
+}
+
+vtable NBodySystem {
+  size: 16
+  methods {
+    _Advance_<C>_float: _NBodySystem_Advance_<C>_float
+    _Energy_<C>: _NBodySystem_Energy_<C>
+  }
+  vartable {
+    bodies: Object@8
+  }
+}
+
+function:2 _NBodySystem_BodyArray {
+  LoadLocal 1
+  LoadLocal 0
+  SetField 0
+  PushFloat 0.0
+  SetLocal 2
+  PushFloat 0.0
+  SetLocal 3
+  PushFloat 0.0
+  SetLocal 4
+  PushInt 0
+  SetLocal 5
+  while {
+    LoadLocal 0
+    GetField 0
+    Call _BodyArray_Length_<C>
+    LoadLocal 5
+    IntLessThan
+  } then {
+    LoadLocal 5
+    LoadLocal 0
+    GetField 0
+    Call _BodyArray_Get_<C>_int
+    SetLocal 6
+    LoadLocal 6
+    GetField 6
+    SetLocal 7
+    LoadLocal 7
+    LoadLocal 6
+    GetField 3
+    FloatMultiply
+    LoadLocal 2
+    FloatAdd
+    SetLocal 2
+    LoadLocal 7
+    LoadLocal 6
+    GetField 4
+    FloatMultiply
+    LoadLocal 3
+    FloatAdd
+    SetLocal 3
+    LoadLocal 7
+    LoadLocal 6
+    GetField 5
+    FloatMultiply
+    LoadLocal 4
+    FloatAdd
+    SetLocal 4
+    PushInt 1
+    LoadLocal 5
+    IntAdd
+    SetLocal 5
+  }
+  LoadLocal 4
+  LoadLocal 3
+  LoadLocal 2
+  PushInt 0
+  LoadLocal 0
+  GetField 0
+  Call _BodyArray_Get_<C>_int
+  Call _Body_OffsetMomentum_<C>_float_float_float
+  LoadLocal 0
+  Return
+}
+
+function:2 _NBodySystem_Advance_<C>_float {
+  LoadLocal 0
+  GetField 0
+  Call _BodyArray_Length_<C>
+  SetLocal 2
+  PushInt 0
+  SetLocal 3
+  while {
+    LoadLocal 2
+    LoadLocal 3
+    IntLessThan
+  } then {
+    LoadLocal 3
+    LoadLocal 0
+    GetField 0
+    Call _BodyArray_Get_<C>_int
+    SetLocal 4
+    PushInt 1
+    LoadLocal 3
+    IntAdd
+    SetLocal 5
+    while {
+      LoadLocal 2
+      LoadLocal 5
+      IntLessThan
+    } then {
+      LoadLocal 5
+      LoadLocal 0
+      GetField 0
+      Call _BodyArray_Get_<C>_int
+      SetLocal 6
+      LoadLocal 6
+      GetField 0
+      LoadLocal 4
+      GetField 0
+      FloatSubtract
+      SetLocal 7
+      LoadLocal 6
+      GetField 1
+      LoadLocal 4
+      GetField 1
+      FloatSubtract
+      SetLocal 8
+      LoadLocal 6
+      GetField 2
+      LoadLocal 4
+      GetField 2
+      FloatSubtract
+      SetLocal 9
+      LoadLocal 9
+      LoadLocal 9
+      FloatMultiply
+      LoadLocal 8
+      LoadLocal 8
+      FloatMultiply
+      LoadLocal 7
+      LoadLocal 7
+      FloatMultiply
+      FloatAdd
+      FloatAdd
+      FloatSqrt
+      SetLocal 10
+      LoadLocal 10
+      LoadLocal 10
+      LoadLocal 10
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 1
+      FloatDivide
+      SetLocal 11
+      LoadLocal 11
+      LoadLocal 6
+      GetField 6
+      LoadLocal 7
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 4
+      GetField 3
+      FloatSubtract
+      LoadLocal 4
+      SetField 3
+      LoadLocal 11
+      LoadLocal 6
+      GetField 6
+      LoadLocal 8
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 4
+      GetField 4
+      FloatSubtract
+      LoadLocal 4
+      SetField 4
+      LoadLocal 11
+      LoadLocal 6
+      GetField 6
+      LoadLocal 9
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 4
+      GetField 5
+      FloatSubtract
+      LoadLocal 4
+      SetField 5
+      LoadLocal 11
+      LoadLocal 4
+      GetField 6
+      LoadLocal 7
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 6
+      GetField 3
+      FloatAdd
+      LoadLocal 6
+      SetField 3
+      LoadLocal 11
+      LoadLocal 4
+      GetField 6
+      LoadLocal 8
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 6
+      GetField 4
+      FloatAdd
+      LoadLocal 6
+      SetField 4
+      LoadLocal 11
+      LoadLocal 4
+      GetField 6
+      LoadLocal 9
+      FloatMultiply
+      FloatMultiply
+      LoadLocal 6
+      GetField 5
+      FloatAdd
+      LoadLocal 6
+      SetField 5
+      PushInt 1
+      LoadLocal 5
+      IntAdd
+      SetLocal 5
+    }
+    PushInt 1
+    LoadLocal 3
+    IntAdd
+    SetLocal 3
+  }
+  PushInt 0
+  SetLocal 3
+  while {
+    LoadLocal 2
+    LoadLocal 3
+    IntLessThan
+  } then {
+    LoadLocal 3
+    LoadLocal 0
+    GetField 0
+    Call _BodyArray_Get_<C>_int
+    SetLocal 12
+    LoadLocal 12
+    GetField 3
+    LoadLocal 1
+    FloatMultiply
+    LoadLocal 12
+    GetField 0
+    FloatAdd
+    LoadLocal 12
+    SetField 0
+    LoadLocal 12
+    GetField 4
+    LoadLocal 1
+    FloatMultiply
+    LoadLocal 12
+    GetField 1
+    FloatAdd
+    LoadLocal 12
+    SetField 1
+    LoadLocal 12
+    GetField 5
+    LoadLocal 1
+    FloatMultiply
+    LoadLocal 12
+    GetField 2
+    FloatAdd
+    LoadLocal 12
+    SetField 2
+    PushInt 1
+    LoadLocal 3
+    IntAdd
+    SetLocal 3
+  }
+}
+
+function:1 _NBodySystem_Energy_<C> {
+  PushFloat 0.0
+  SetLocal 1
+  LoadLocal 0
+  GetField 0
+  Call _BodyArray_Length_<C>
+  SetLocal 2
+  PushInt 0
+  SetLocal 3
+  while {
+    LoadLocal 2
+    LoadLocal 3
+    IntLessThan
+  } then {
+    LoadLocal 3
+    LoadLocal 0
+    GetField 0
+    Call _BodyArray_Get_<C>_int
+    SetLocal 4
+    LoadLocal 4
+    GetField 5
+    LoadLocal 4
+    GetField 5
+    FloatMultiply
+    LoadLocal 4
+    GetField 4
+    LoadLocal 4
+    GetField 4
+    FloatMultiply
+    LoadLocal 4
+    GetField 3
+    LoadLocal 4
+    GetField 3
+    FloatMultiply
+    FloatAdd
+    FloatAdd
+    LoadLocal 4
+    GetField 6
+    PushFloat 0.500000000000000
+    FloatMultiply
+    FloatMultiply
+    LoadLocal 1
+    FloatAdd
+    SetLocal 1
+    PushInt 1
+    LoadLocal 3
+    IntAdd
+    SetLocal 5
+    while {
+      LoadLocal 2
+      LoadLocal 5
+      IntLessThan
+    } then {
+      LoadLocal 5
+      LoadLocal 0
+      GetField 0
+      Call _BodyArray_Get_<C>_int
+      SetLocal 6
+      LoadLocal 6
+      GetField 0
+      LoadLocal 4
+      GetField 0
+      FloatSubtract
+      SetLocal 7
+      LoadLocal 6
+      GetField 1
+      LoadLocal 4
+      GetField 1
+      FloatSubtract
+      SetLocal 8
+      LoadLocal 6
+      GetField 2
+      LoadLocal 4
+      GetField 2
+      FloatSubtract
+      SetLocal 9
+      LoadLocal 9
+      LoadLocal 9
+      FloatMultiply
+      LoadLocal 8
+      LoadLocal 8
+      FloatMultiply
+      LoadLocal 7
+      LoadLocal 7
+      FloatMultiply
+      FloatAdd
+      FloatAdd
+      FloatSqrt
+      SetLocal 10
+      LoadLocal 10
+      LoadLocal 6
+      GetField 6
+      LoadLocal 4
+      GetField 6
+      FloatMultiply
+      FloatDivide
+      LoadLocal 1
+      FloatSubtract
+      SetLocal 1
+      PushInt 1
+      LoadLocal 5
+      IntAdd
+      SetLocal 5
+    }
+    PushInt 1
+    LoadLocal 3
+    IntAdd
+    SetLocal 3
+  }
+  LoadLocal 1
+  Return
+}
+
+function:3 _Global_FloatEqualsWithPrecision_float_float_float {
+  LoadLocal 1
+  LoadLocal 0
+  FloatSubtract
+  SetLocal 3
+  if {
+    LoadLocal 2
+    FloatNegate
+    LoadLocal 3
+    FloatNegate
+    FloatGreaterThan
+    LoadLocal 2
+    LoadLocal 3
+    FloatLessThan
+    BoolOr
+  } then {
+    PushBool true
+    Return
+  }
+  PushBool false
+  Return
+}
+
+function:1 _Global_Main_StringArray {
+  PushFloat 0.0
+  SetLocal 1
+  PushInt 3
+  SetLocal 2
+  while {
+    PushInt 24
+    LoadLocal 2
+    IntLessEqual
+  } then {
+    PushInt 5
+    CallConstructor _BodyArray_int
+    SetLocal 3
+    Call _Global_Sun
+    PushInt 0
+    LoadLocal 3
+    Call _BodyArray_Set_<C>_int_Body
+    Call _Global_Jupiter
+    PushInt 1
+    LoadLocal 3
+    Call _BodyArray_Set_<C>_int_Body
+    Call _Global_Saturn
+    PushInt 2
+    LoadLocal 3
+    Call _BodyArray_Set_<C>_int_Body
+    Call _Global_Uranus
+    PushInt 3
+    LoadLocal 3
+    Call _BodyArray_Set_<C>_int_Body
+    Call _Global_Neptune
+    PushInt 4
+    LoadLocal 3
+    Call _BodyArray_Set_<C>_int_Body
+    LoadLocal 3
+    CallConstructor _NBodySystem_BodyArray
+    SetLocal 4
+    LoadLocal 4
+    Call _NBodySystem_Energy_<C>
+    LoadLocal 1
+    FloatAdd
+    SetLocal 1
+    PushInt 0
+    SetLocal 5
+    PushInt 100
+    LoadLocal 2
+    IntMultiply
+    SetLocal 6
+    while {
+      LoadLocal 6
+      LoadLocal 5
+      IntLessThan
+    } then {
+      PushFloat 0.010000000000000
+      LoadLocal 4
+      Call _NBodySystem_Advance_<C>_float
+      PushInt 1
+      LoadLocal 5
+      IntAdd
+      SetLocal 5
+    }
+    LoadLocal 4
+    Call _NBodySystem_Energy_<C>
+    LoadLocal 1
+    FloatAdd
+    SetLocal 1
+    PushInt 2
+    LoadLocal 2
+    IntMultiply
+    SetLocal 2
+  }
+  PushFloat 1.352486240853610
+  FloatNegate
+  SetLocal 7
+  if {
+    PushFloat 0.000000000000001
+    LoadLocal 7
+    LoadLocal 1
+    Call _Global_FloatEqualsWithPrecision_float_float_float
+    BoolNot
+  } then {
+    LoadLocal 7
+    FloatToString
+    PushString ", expected "
+    LoadLocal 1
+    FloatToString
+    PushString "ERROR: bad result: "
+    StringConcat
+    StringConcat
+    StringConcat
+    PrintLine
+    PushInt 1
+    Return
+  }
+  PushInt 0
+  Return
+}
+
