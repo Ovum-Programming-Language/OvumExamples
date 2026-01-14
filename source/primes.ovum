@@ -1,7 +1,7 @@
 fun SieveOfEratosthenes(n : int) : Void {
     var prime_array : BoolArray = BoolArray(n + 1, true)
     var p: int = 2
-    var n_sqrt = sys::Sqrt(n as float) as int
+    var n_sqrt : int = sys::Sqrt(n as float) as int
     
     while (p <= n_sqrt) {
         if (prime_array[p]) {
