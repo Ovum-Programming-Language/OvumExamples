@@ -1,5 +1,5 @@
 init-static {
-  PushFloat 3.14159
+  PushFloat 3.141590000000000
   CallConstructor _Float_float
   SetStatic 0
 }
