@@ -1,0 +1,18 @@
+// An interface to run any kind of task, compatible with Main
+interface ITask {
+    fun Run(args : StringArray) : int
+}
+
+fun RunBenchmark(task : ITask, args : StringArray) {
+    val start : Int = sys::UnixTimeNs()
+    val result : int = task.Run(args)
+    val end : Int = sys::UnixTimeNs()
+    val time_spent : int = end - start
+    val sec_spent : int = time_spent / 1000000000
+    val ms_spent : int = (time_spent / 1000000) % 1000
+    val us_spent : int = (time_spent / 1000) % 1000
+    val ns_spent : int = time_spent % 1000
+    sys::PrintLine("Time spent (s): " + sys::ToString(sec_spent) + "." + sys::ToString(ms_spent) + "." + sys::ToString(us_spent) + "." + sys::ToString(ns_spent))
+
+    return result
+}

@@ -1,0 +1,122 @@
+fun Swap(var array: IntArray, a: int, b: int) : Void {
+    val temp: int = array[a]
+    array[a] = array[b]
+    array[b] = temp
+}
+
+fun QuickSort(var array: IntArray, start: int, end: int) : Void {
+    if (start >= end) {
+        return
+    }
+
+    val pivot: int = array[(start + end) / 2]
+    var i: int = start
+    var j: int = end
+
+    while (i <= j) {
+        while (array[i] < pivot) {
+            i = i + 1
+        }
+
+        while (array[j] > pivot) {
+            j = j - 1
+        }
+
+        if (i > j) {
+            break
+        }
+
+        Swap(array, i, j)
+        i = i + 1
+        j = j - 1
+    }
+
+    QuickSort(array, start, j)
+    QuickSort(array, i, end)
+}
+
+fun Sort(var array: IntArray) : Void {
+    return QuickSort(array, 0, array.Length() - 1)
+}
+
+fun Swap(var array: FloatArray, a: int, b: int) : Void {
+    val temp: float = array[a]
+    array[a] = array[b]
+    array[b] = temp
+}
+
+fun QuickSort(var array: FloatArray, start: int, end: int) : Void {
+    if (start >= end) {
+        return
+    }
+
+    val pivot: float = array[(start + end) / 2]
+    var i: int = start
+    var j: int = end
+
+    while (i <= j) {
+        while (array[i] < pivot) {
+            i = i + 1
+        }
+
+        while (array[j] > pivot) {
+            j = j - 1
+        }
+
+        if (i > j) {
+            break
+        }
+
+        Swap(array, i, j)
+        i = i + 1
+        j = j - 1
+    }
+
+    QuickSort(array, start, j)
+    QuickSort(array, i, end)
+}
+
+fun Sort(var array: FloatArray) : Void {
+    return QuickSort(array, 0, array.Length() - 1)
+}
+
+fun Swap(var array: StringArray, a: int, b: int) : Void {
+    val temp: String = array[a]
+    array[a] = array[b]
+    array[b] = temp
+}
+
+fun QuickSort(var array: StringArray, start: int, end: int) : Void {
+    if (start >= end) {
+        return
+    }
+
+    val pivot: String = array[(start + end) / 2]
+    var i: int = start
+    var j: int = end
+
+    while (i <= j) {
+        while (array[i].IsLess(pivot)) {
+            i = i + 1
+        }
+
+        while (pivot.IsLess(array[j])) {
+            j = j - 1
+        }
+
+        if (i > j) {
+            break
+        }
+
+        Swap(array, i, j)
+        i = i + 1
+        j = j - 1
+    }
+
+    QuickSort(array, start, j)
+    QuickSort(array, i, end)
+}
+
+fun Sort(var array: StringArray) : Void {
+    return QuickSort(array, 0, array.Length() - 1)
+}

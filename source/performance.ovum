@@ -1,0 +1,28 @@
+#import "algorithm.ovum"
+#import "benchmark.ovum"
+
+class RandomSorter implements ITask {
+    public fun RandomSorter() : RandomSorter {
+        return this
+    }
+
+    public override fun Run(args: StringArray) : int {
+        var array : IntArray = IntArray(10000, 0)
+        var i: int = 0
+
+        while (i < array.Length()) {
+            array[i] = sys::Random()
+            i = i + 1
+        }
+
+        Sort(array)
+        sys::PrintLine("Sorted " + sys::ToString(array.Length()) + " elements")
+
+        return 0
+    }
+}
+
+fun Main(args: StringArray): int {
+    val task : RandomSorter = RandomSorter()
+    return RunBenchmark(task, args)
+}
