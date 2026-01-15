@@ -11,6 +11,67 @@ init-static {
   SetStatic 2
 }
 
+function:2 _Global_RunBenchmark_ITask_StringArray {
+  UnixTimeNs
+  CallConstructor _Int_int
+  SetLocal 2
+  LoadLocal 1
+  LoadLocal 0
+  CallVirtual _Run_<C>_StringArray
+  SetLocal 3
+  UnixTimeNs
+  CallConstructor _Int_int
+  SetLocal 4
+  LoadLocal 2
+  Unwrap
+  LoadLocal 4
+  Unwrap
+  IntSubtract
+  SetLocal 5
+  PushInt 1000000000
+  LoadLocal 5
+  IntDivide
+  SetLocal 6
+  PushInt 1000
+  PushInt 1000000
+  LoadLocal 5
+  IntDivide
+  IntModulo
+  SetLocal 7
+  PushInt 1000
+  PushInt 1000
+  LoadLocal 5
+  IntDivide
+  IntModulo
+  SetLocal 8
+  PushInt 1000
+  LoadLocal 5
+  IntModulo
+  SetLocal 9
+  LoadLocal 9
+  IntToString
+  PushString "."
+  LoadLocal 8
+  IntToString
+  PushString "."
+  LoadLocal 7
+  IntToString
+  PushString "."
+  LoadLocal 6
+  IntToString
+  PushString "Time spent (s): "
+  StringConcat
+  StringConcat
+  StringConcat
+  StringConcat
+  StringConcat
+  StringConcat
+  StringConcat
+  PrintLine
+  LoadLocal 3
+  Return
+}
+
 vtable Body {
   size: 64
   methods {
@@ -644,7 +705,7 @@ function:3 _Global_FloatEqualsWithPrecision_float_float_float {
   Return
 }
 
-function:1 _Global_Main_StringArray {
+function:1 _Global_main_StringArray {
   PushFloat 0.0
   SetLocal 1
   PushInt 3
@@ -738,6 +799,53 @@ function:1 _Global_Main_StringArray {
     Return
   }
   PushInt 0
+  Return
+}
+
+vtable NBodyProblem {
+  size: 8
+  interfaces {
+    ITask
+  }
+  methods {
+    _Run_<C>_StringArray: _NBodyProblem_Run_<C>_StringArray
+  }
+  vartable {
+  }
+}
+
+function:1 _NBodyProblem {
+  LoadLocal 0
+  Return
+}
+
+function:2 _NBodyProblem_Run_<C>_StringArray {
+  LoadLocal 1
+  Call _Global_main_StringArray
+  Return
+}
+
+function:0 _Global_PrintMemoryUsage {
+  PushString " bytes"
+  GetMemoryUsage
+  CallConstructor _Int_int
+  Call _Int_ToString_<C>
+  PushString "Memory used: "
+  StringConcat
+  StringConcat
+  PrintLine
+}
+
+function:1 _Global_Main_StringArray {
+  Call _Global_PrintMemoryUsage
+  CallConstructor _NBodyProblem
+  SetLocal 1
+  LoadLocal 0
+  LoadLocal 1
+  Call _Global_RunBenchmark_ITask_StringArray
+  SetLocal 2
+  Call _Global_PrintMemoryUsage
+  LoadLocal 2
   Return
 }
 
