@@ -1,9 +1,71 @@
 init-static {
 }
 
-function:2 _Global_Add_float_float {
+function:3 _Global_Add_float_float_float {
   LoadLocal 0
   LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  LoadLocal 1
+  LoadLocal 2
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
+  FloatAdd
+  FloatMultiply
   FloatAdd
   Return
 }
@@ -11,8 +73,21 @@ function:2 _Global_Add_float_float {
 function:1 _Global_Main_StringArray {
   PushFloat 0.0
   PushFloat 1.0
-  Call _Global_Add_float_float
+  PushInt 0
+  SetLocal 0
+  while {
+    PushInt 200000
+    LoadLocal 0
+    IntLessThan
+  } then {
+    PushFloat 1.1
+    PushFloat 1.1
+    Call _Global_Add_float_float_float
+    LoadLocal 0
+    PushInt 1
+    IntAdd
+    SetLocal 0
+  }
   PushInt 0
   Return
 }
-
